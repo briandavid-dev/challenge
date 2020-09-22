@@ -20,9 +20,15 @@ module.exports.getOrdersUser = async (req, res) => {
 
         // get connection
         var conn = await poolUsers.getConnection();
+        
 
         // create a new query
         var query = `SELECT id FROM orders WHERE user_id = '${id}'`;
+
+        pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results[0].solution);
+        });
 
         // executing the query
         var rows = await conn.query(query);

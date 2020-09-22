@@ -1,4 +1,4 @@
-const mariadb = require('mariadb');
+const mariadb = require('mysql');
 
 // DB 1 - users
 
