@@ -9,7 +9,7 @@ routes.get(
 );
 
 routes.get(
-    '/payment/:ext_ref_id',
+    '/payment/:order_id/:ext_ref_id',
     ordersController.getOrdersOrder
 );
 
