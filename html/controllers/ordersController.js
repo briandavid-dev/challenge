@@ -1,9 +1,9 @@
 const { 
-    poolUsers,
-    //poolOrders,
-    //poolPayments,
-    //poolCarts,
-    //poolProducts
+    //poolUsers,
+    poolOrders,
+    poolPayments,
+    poolCarts,
+    poolProducts
 } = require('../database');
 
 
@@ -16,22 +16,16 @@ module.exports.getOrdersUser = async (req, res) => {
 
         
 
-        // buscamos los ids de las ordenes
-
-        // get connection
-        var conn = await poolUsers.getConnection();
-        
+        // 1 buscamos los ids de las ordenes
 
         // create a new query
         var query = `SELECT id FROM orders WHERE user_id = '${id}'`;
 
-        pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-            if (error) throw error;
-            console.log('The solution is: ', results[0].solution);
-        });
+        // now get a Promise wrapped instance of that pool
+        var promise = poolOrders.promise();
 
-        // executing the query
-        var rows = await conn.query(query);
+        // query database using promises
+        var [rows,fields] = await promise.query(query);
 
         Object.keys(rows).map(function(k){
             return rows[k] = "'"+rows[k].id+"'"
@@ -39,36 +33,37 @@ module.exports.getOrdersUser = async (req, res) => {
         
         var orders_ids = rows.toString();
 
-        console.log('orders_ids');
-/*
-        // buscamos los pagos de acuerdo a los ids de las ordenes del usuario
+        
 
-        // get connection
-        var conn = await poolPayments.getConnection();
+        // 2 buscamos los pagos de acuerdo a los ids de las ordenes del usuario
 
-        // create a new query
-        var query = `SELECT * 
+        var query = `SELECT order_id 
                      FROM payments 
                      WHERE order_id IN (${orders_ids}) AND status = 'Approved'`;
         
-        // executing the query
-        var rows = await conn.query(query);
+        var promise = poolPayments.promise();
+
+        var [rows,fields] = await promise.query(query);
+
+        Object.keys(rows).map(function(k){
+            return rows[k] = "'"+rows[k].order_id+"'"
+        }).join(",");
+
+        var orders_ids = rows.toString();
 
 
-
-        // buscamos el carro de compras junto a los items (productos) agregados al mismo
-
-        // get connection
-        var conn = await poolCarts.getConnection();
+        
+        // 3 buscamos el carro de compras junto a los items (productos) agregados al mismo
 
         // create a new query
         var query = `SELECT product_id 
                      FROM carts car 
                         JOIN cart_items cai ON car.id = cai.cart_id 
                      WHERE order_id IN (${orders_ids})`;
+        
+        var promise = poolCarts.promise();
 
-        // executing the query
-        var rows = await conn.query(query);
+        var [rows,fields] = await promise.query(query);
 
         Object.keys(rows).map(function(k){
             return rows[k] = "'"+rows[k].product_id+"'"
@@ -76,26 +71,23 @@ module.exports.getOrdersUser = async (req, res) => {
 
         var products_ids = rows.toString();
 
-
+        
 
         // buscamos los productos asociados a los items del carro de compras
 
-        // get connection
-        var conn = await poolProducts.getConnection();
-
-        // create a new query
         var query = `SELECT * 
                      FROM products
                      WHERE id IN (${products_ids})`;
 
-        // executing the query
-        var rows = await conn.query(query);
+        var promise = poolProducts.promise();
+
+        var [rows,fields] = await promise.query(query);
         
 
 
         // response
         res.status(200).json(rows);
-     */   
+    
     } 
     catch (error) 
     {

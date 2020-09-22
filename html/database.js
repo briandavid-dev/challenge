@@ -1,4 +1,4 @@
-const mariadb = require('mysql');
+const mariadb = require('mysql2');
 
 // DB 1 - users
 
@@ -23,12 +23,12 @@ const getConUsers = async function  () {
 
 
 
-/*
+
 // DB 2 - orders
 
 const poolOrders = mariadb.createPool({
     host: 'localhost',
-    port: '3306',
+    port: '6035',
     user: 'demo2',
     password: 'demo2',
     database: 'demo2'
@@ -50,7 +50,7 @@ async function getConnection () {
 
 const poolProducts = mariadb.createPool({
     host: 'localhost',
-    port: '3306',
+    port: '6036',
     user: 'demo3',
     password: 'demo3',
     database: 'demo3'
@@ -72,7 +72,7 @@ async function getConnection () {
 
 const poolPayments = mariadb.createPool({
     host: 'localhost',
-    port: '3306',
+    port: '6037',
     user: 'demo4',
     password: 'demo4',
     database: 'demo4'
@@ -94,7 +94,7 @@ async function getConnection () {
 
 const poolCarts = mariadb.createPool({
     host: 'localhost',
-    port: '3306',
+    port: '6038',
     user: 'demo5',
     password: 'demo5',
     database: 'demo5'
@@ -122,8 +122,3 @@ module.exports = {
     poolCarts
 };
 
-*/
-
-module.exports = { 
-    poolUsers
-};
