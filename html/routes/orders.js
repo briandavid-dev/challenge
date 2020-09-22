@@ -13,4 +13,9 @@ routes.get(
     ordersController.getOrdersOrder
 );
 
+routes.get(
+    '/cart/user/:id',
+    ordersController.getCartUser
+);
+
 module.exports = routes;

@@ -8,6 +8,8 @@ const {
 
 
 
+
+
 module.exports.getOrdersUser = async (req, res) => {
     try {
 
@@ -102,9 +104,6 @@ module.exports.getOrdersUser = async (req, res) => {
 
 
 
-
-
-
 module.exports.getOrdersOrder = async (req, res) => {
     try {
 
@@ -152,6 +151,63 @@ module.exports.getOrdersOrder = async (req, res) => {
         
 
         // 3 buscamos los productos asociados a los items del carro de compras
+
+        var query = `SELECT * 
+                     FROM products
+                     WHERE id IN (${products_ids})`;
+
+        var promise = poolProducts.promise();
+
+        var [rows,fields] = await promise.query(query);
+        
+
+
+        // response
+        res.status(200).json(rows);
+    
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        res.json({
+            'msg': `Error: ${error.message}`
+        });
+    }
+}
+
+
+
+
+
+module.exports.getCartUser = async (req, res) => {
+    try {
+
+        // get params
+        const { id } = req.params;
+
+        
+
+        // 1 buscamos el carro de compras junto a los items (productos) agregados al mismo de un usuario
+
+        // create a new query
+        var query = `SELECT product_id 
+                     FROM carts car 
+                        JOIN cart_items cai ON car.id = cai.cart_id 
+                     WHERE user_id  = '${id}'`;
+        
+        var promise = poolCarts.promise();
+
+        var [rows,fields] = await promise.query(query);
+
+        Object.keys(rows).map(function(k){
+            return rows[k] = "'"+rows[k].product_id+"'"
+        }).join(",");
+
+        var products_ids = rows.toString();
+
+        
+
+        // 4 buscamos los productos asociados a los items del carro de compras
 
         var query = `SELECT * 
                      FROM products

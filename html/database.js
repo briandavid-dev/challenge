@@ -11,18 +11,6 @@ const poolUsers = mariadb.createPool({
 });
 
 
-const getConUsers = async function  () {
-    try {
-        const connection = await poolUsers.getConnection();
-        return connection;
-    } catch (error) {
-        console.log('poolUsers', error);
-    } 
-}
-
-
-
-
 
 // DB 2 - orders
 
@@ -33,16 +21,6 @@ const poolOrders = mariadb.createPool({
     password: 'demo2',
     database: 'demo2'
 });
-
-
-async function getConnection () {
-    try {
-        const connection = await poolOrders.getConnection();
-        return connection;
-    } catch (error) {
-        console.log('poolOrders', error);
-    } 
-}
 
 
 
@@ -57,16 +35,6 @@ const poolProducts = mariadb.createPool({
 });
 
 
-async function getConnection () {
-    try {
-        const connection = await poolProducts.getConnection();
-        return connection;
-    } catch (error) {
-        console.log('poolProducts', error);
-    } 
-}
-
-
 
 // DB 4 - payments
 
@@ -79,16 +47,6 @@ const poolPayments = mariadb.createPool({
 });
 
 
-async function getConnection () {
-    try {
-        const connection = await poolPayments.getConnection();
-        return connection;
-    } catch (error) {
-        console.log('poolPayments', error);
-    } 
-}
-
-
 
 // DB 5 - carts
 
@@ -99,16 +57,6 @@ const poolCarts = mariadb.createPool({
     password: 'demo5',
     database: 'demo5'
 });
-
-
-async function getConnection () {
-    try {
-        const connection = await poolCarts.getConnection();
-        return connection;
-    } catch (error) {
-        console.log('poolCarts', error);
-    } 
-}
 
 
 
