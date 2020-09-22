@@ -6,7 +6,7 @@ services:
     image: mysql:8
     container_name: db1
     environment:
-      MYSQL_ROOT_PASSWORD: demo1 
+      MYSQL_ROOT_PASSWORD: demo1
       MYSQL_DATABASE: demo1
       MYSQL_USER: demo1
       MYSQL_PASSWORD: demo1
