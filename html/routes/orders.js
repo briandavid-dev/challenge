@@ -4,13 +4,13 @@ const routes = express.Router();
 const ordersController = require('../controllers/ordersController');
 
 routes.get(
-    '/:id',
-    ordersController.getOrders
+    '/user/:id',
+    ordersController.getOrdersUser
 );
 
 routes.get(
-    '/user/:id',
-    ordersController.getOrdersUser
+    '/payment/:ext_ref_id',
+    ordersController.getOrdersOrder
 );
 
 module.exports = routes;

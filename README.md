@@ -25,3 +25,20 @@
 
 ### Explicación
 
+
+
+
+
+### uuid generados con UUID_TO_BIN(UUID())
+> datos para testing
+> user_id      0x0be8add0fc6f11eab8920242ac120008
+> cart_id      0x5b456bc2fc6f11eab8920242ac120008
+> order_id     0x98e91635fc7011eab8920242ac120008
+> payment_id   0x7e4ee616fc7111eab8920242ac120008
+> products
+>    0xd7651958fc7111eab8920242ac120008
+>    0xe621216bfc7111eab8920242ac120008
+> cart_items
+>    0x324c2998fc7211eab8920242ac120008
+>    0x37be4a4ffc7211eab8920242ac120008
+

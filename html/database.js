@@ -11,7 +11,7 @@ const poolUsers = mariadb.createPool({
 });
 
 
-async function getConnection () {
+const getConUsers = async function  () {
     try {
         const connection = await poolUsers.getConnection();
         return connection;
@@ -22,12 +22,14 @@ async function getConnection () {
 
 
 
+
+/*
 // DB 2 - orders
 
 const poolOrders = mariadb.createPool({
-    host: '127.0.0.1',
-    port: '6035',
-    user: 'root',
+    host: 'localhost',
+    port: '3306',
+    user: 'demo2',
     password: 'demo2',
     database: 'demo2'
 });
@@ -47,9 +49,9 @@ async function getConnection () {
 // DB 3 - products
 
 const poolProducts = mariadb.createPool({
-    host: '127.0.0.1',
-    port: '6036',
-    user: 'root',
+    host: 'localhost',
+    port: '3306',
+    user: 'demo3',
     password: 'demo3',
     database: 'demo3'
 });
@@ -69,9 +71,9 @@ async function getConnection () {
 // DB 4 - payments
 
 const poolPayments = mariadb.createPool({
-    host: '127.0.0.1',
-    port: '6037',
-    user: 'root',
+    host: 'localhost',
+    port: '3306',
+    user: 'demo4',
     password: 'demo4',
     database: 'demo4'
 });
@@ -91,9 +93,9 @@ async function getConnection () {
 // DB 5 - carts
 
 const poolCarts = mariadb.createPool({
-    host: '127.0.0.1',
-    port: '6038',
-    user: 'root',
+    host: 'localhost',
+    port: '3306',
+    user: 'demo5',
     password: 'demo5',
     database: 'demo5'
 });
@@ -118,4 +120,10 @@ module.exports = {
     poolProducts,
     poolPayments,
     poolCarts
+};
+
+*/
+
+module.exports = { 
+    poolUsers
 };
