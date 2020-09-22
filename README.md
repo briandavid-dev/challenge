@@ -13,7 +13,7 @@
 > npm start
 
 
-###### Paso 3 <br />
+###### Paso 3 - aplicar casos de uso y ver los resultados <br />
 > Requests
 
 
@@ -22,8 +22,19 @@
 > :id -> id del usuario (ej.: 0x0be8add0fc6f11eab8920242ac120008) <br />
 > http://localhost:1000/api/orders/user/0x0be8add0fc6f11eab8920242ac120008 <br />
 
+###### Obtenga los productos asociados a una orden de acuerdo al external_reference_id de un pago.
+> GET /api/orders/payment/:order_id/:ext_ref_id <br />
+> :order_id -> id de la orden (ej.: 0x98e91635fc7011eab8920242ac120008) <br />
+> :ext_ref_id -> external reference id (ej.: EXTERNAL_ID_001) <br />
+> http://localhost:1000/api/orders/payment/0x98e91635fc7011eab8920242ac120008/EXTERNAL_ID_001
 
-### Explicación
+###### Obtenga los productos del carro de compras de un usuario X.
+> GET /api/orders/cart/user/:id
+> :id -> id del usuario (ej.: 0x0be8add0fc6f11eab8920242ac120008) <br />
+> http://localhost:1000/api/orders/cart/user/0x0be8add0fc6f11eab8920242ac120008
+
+
+
 
 
 
